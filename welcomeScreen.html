@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="refresh" content="21600">
+        <title>Welcome - Odoo</title>
+        <style type="text/css">
+            * {
+                margin: 0;
+                padding: 0;
+                /* cursor: none; */
+            }
+
+            body {
+                font-family: Montserrat, 'Open Sans', sans-serif;
+                font-weight: 400;
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none; /* Safari */
+                -khtml-user-select: none; /* Konqueror HTML */
+                -moz-user-select: none; /* Old versions of Firefox */
+                -ms-user-select: none; /* Internet Explorer/Edge */
+                    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+                -webkit-user-drag: none; /* Safari */
+                -khtml-user-drag: none; /* Konqueror HTML */
+                -moz-user-drag: none; /* Old versions of Firefox */
+                -ms-user-drag: none; /* Internet Explorer/Edge */
+                    user-drag: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+                background-color: #714B67;
+                color: #fff;
+                overflow: hidden;
+            }
+
+            img {
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none; /* Safari */
+                -khtml-user-select: none; /* Konqueror HTML */
+                -moz-user-select: none; /* Old versions of Firefox */
+                -ms-user-select: none; /* Internet Explorer/Edge */
+                    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+                -webkit-user-drag: none; /* Safari */
+                -khtml-user-drag: none; /* Konqueror HTML */
+                -moz-user-drag: none; /* Old versions of Firefox */
+                -ms-user-drag: none; /* Internet Explorer/Edge */
+                    user-drag: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+            }
+
+            .welcome-section {
+                display: flex;
+                width: 30%;
+                height: 100vh;
+                float: left;
+                flex-wrap: wrap;
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.4);
+            }
+
+            .welcome-section .content-wrap {
+                margin: auto;
+                transform: translate3d(0, 0, 0);
+                animation-iteration-count: infinite;
+            }
+
+            .welcome-section .content-wrap .fly-in-text {
+                list-style: none;
+            }
+
+            .welcome-section .content-wrap .fly-in-text li {
+                display: inline-block;
+                /* margin-right: 15px; */
+                font-size: 6em;
+                transition: all 2s ease;
+                animation-iteration-count: infinite;
+            }
+
+            .welcome-section .content-wrap .fly-in-text li:last-child {
+                margin-right: 0;
+            }
+
+            .welcome-section .content-wrap .enter-button {
+                display: block;
+                text-align: center;
+                font-size: 3em;
+                color: #00A09D;
+                opacity: 1;
+                transition: all 1s ease 2s;
+                animation-iteration-count: infinite;
+            }
+
+            .welcome-section #wifi {
+                position: relative;
+                display: flex;
+                align-items: center;
+                left: 3em;
+                bottom: 2em;
+            }
+
+            .welcome-section #wifi img {
+                user-drag: none;
+                user-select: none;
+                padding-right: 1em;
+            }
+
+            .welcome-section #wifi #wifi-logo {
+                width: 15%;
+                height: auto;
+            }
+
+            .welcome-section #wifi ul {
+                padding-left: 0.1em;
+                font-size: 1.5em;
+                list-style: none;
+                display: inline-block;
+            }
+
+            .welcome-section #wifi li {
+                align-items: center;
+                vertical-align: middle;
+            }
+
+            .menu-section {
+                display: flex;
+                width: 70%;
+                height: 100vh;
+                align-items: center;
+                color: white;
+                justify-content: center;
+                flex-wrap: wrap;
+                flex-direction: column;
+                font-size: 1.5em;
+            }
+
+            .menu-section h1 {
+                color: #00A09D;
+                font-size: 3em;
+                text-align: center;
+            }
+
+            .menu-section table {
+                width: 85%;
+                table-layout: fixed;
+                line-height: 1.3;
+                border: 1px solid white;
+                margin: 0 auto;
+            }
+
+            .menu-section table td {
+                padding: 10px 20px 20px 0;
+                vertical-align: text-top;
+                font-size: 0.9em;
+            }
+
+            .menu-section table thead th {
+                text-decoration: underline;
+                text-align: left;
+            }
+
+            #dateTime {
+                position: absolute;
+                right: 3em;
+                top: 2em;
+            }
+
+            #dateTime #time {
+                font-size: 3em;
+            }
+
+            #dateTime #date {
+                font-size: 1.5em;
+            }
+
+            #dateTime #date:before {
+                content: "";
+                display: block;
+            }
+            
+            .welcome-section .content-hidden .content-wrap .fly-in-text li { opacity: 0; }
+            .welcome-section .content-hidden .content-wrap .fly-in-text li:nth-child(1) { transform: translate3d(-100px, 0, 0); }
+            .welcome-section .content-hidden .content-wrap .fly-in-text li:nth-child(2) { transform: translate3d(100px, 0, 0); }
+            .welcome-section .content-hidden .content-wrap .enter-button { opacity: 0; transform: translate3d(0, -30px, 0); }
+
+            .menu-section .content-hidden { opacity: 0; }
+        </style>
+    </head>
+    <body>
+        <!--Add buttons to initiate auth sequence and sign out-->
+        <button id="authorize_button" style="display: none;">Authorize</button>
+        <button id="signout_button" style="display: none;">Sign Out</button>
+
+        <div class="welcome-section content-hidden">
+            <div class="content-wrap">
+                <ul class="fly-in-text">
+                    <li>Wel</li>
+                    <li>come</li>
+                </ul>
+
+                <span class="enter-button">Odooers</span>
+            </div>
+            <div id="wifi">
+                <img id="wifi-logo" src='data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB2ZXJzaW9uPSIxLjAiCiAgIHdpZHRoPSI2NDUuNjU2MjUiCiAgIGhlaWdodD0iNDQ3LjMxMjUiCiAgIGlkPSJzdmczMjE1IgogICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxkZWZzCiAgICAgaWQ9ImRlZnMzMjE3IiAvPgogIDxnCiAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEyMS40NTM4OSwtNDA1LjE0Mjk2KSIKICAgICBpZD0ibGF5ZXIxIj4KICAgIDxnCiAgICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3MC41Nzg4ODksMTcuNjQyOTYpIgogICAgICAgaWQ9ImczMjUwIj4KICAgICAgPHBhdGgKICAgICAgICAgZD0ibSAzNzQuNTMxMjUsMzg3LjUgYyAtNzEuNTI4MTUsMCAtMTM1LjIzODEsMzMuNjM1NzUgLTE3Ni4xODc1LDg1LjkzNzUgSCAxNjAgQyA5OS44MzM3ODMsNDczLjQzNzQ5IDUwLjg3NSw1MjIuMzY0OSA1MC44NzUsNTgyLjUzMTI1IHYgNjUuNzgxMjUgYyAwLDYwLjE2NjM4IDQ4Ljk1ODc4NCwxMDkuMTI1IDEwOS4xMjUsMTA5LjEyNSBoIDQ1LjM3NSBjIDQxLjAyMDA1LDQ3LjM4NzUgMTAxLjYwNjU1LDc3LjM3NTAyIDE2OS4xNTYyNSw3Ny4zNzUgNjcuNTQ5NjksMCAxMjguMTM2MiwtMjkuOTg3NTEgMTY5LjE1NjI1LC03Ny4zNzUgaCA0My42ODc1IGMgNjAuMTg5NTUsLTJlLTUgMTA5LjE1NjI1LC00OC45NTg2NCAxMDkuMTU2MjUsLTEwOS4xMjUgViA1ODIuNTMxMjUgQyA2OTYuNTMxMjYsNTIyLjM2NDkzIDY0Ny41NjQ1NSw0NzMuNDM3NSA1ODcuMzc1LDQ3My40Mzc1IEggNTUwLjcxODc1IEMgNTA5Ljc2OTM1LDQyMS4xMzU3NSA0NDYuMDU5NCwzODcuNSAzNzQuNTMxMjUsMzg3LjUgWiIKICAgICAgICAgc3R5bGU9ImZpbGw6IzAwMDAwMDtmaWxsLXJ1bGU6ZXZlbm9kZDtzdHJva2U6bm9uZSIKICAgICAgICAgaWQ9InBhdGgxMTIiIC8+CiAgICAgIDxwYXRoCiAgICAgICAgIGQ9Ik0gMzg4LjU5NzczLDY0OC4zMDYzNiBWIDU4Mi41NDU1IGMgMCwtNDguNTgwNiAzOS41MzU3OSwtODguMTE2NTMgODguMTE2NCwtODguMTE2NTMgaCAxMTAuNjU4NDkgYyA0OC41ODA2MSwwIDg4LjEzOTczLDM5LjUzNTkzIDg4LjEzOTczLDg4LjExNjUzIHYgNjUuNzYwODYgYyAwLDQ4LjU4MDY3IC0zOS41NTkxMiw4OC4xMTY1NCAtODguMTM5NzMsODguMTE2NTQgMCwwIC0xNjIuNTcyNTQsMCAtMjQzLjY0OTA2LDAgMjcuMTgwOTUsLTE5Ljg2MTE4IDQ0Ljg3NDE3LC01MS45NjA3OCA0NC44NzQxNywtODguMTE2NTQgeiIKICAgICAgICAgc3R5bGU9ImZpbGw6I2ZmZmZmZjtmaWxsLXJ1bGU6bm9uemVybztzdHJva2U6bm9uZTtzdHJva2Utd2lkdGg6NC45Njg7c3Ryb2tlLWxpbmVjYXA6YnV0dDtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlLW1pdGVybGltaXQ6My44NjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lIgogICAgICAgICBpZD0icGF0aDExOCIgLz4KICAgICAgPHBhdGgKICAgICAgICAgZD0ibSAyNDQuNzY3MzIsNjgyLjQzNDA4IGggLTM2LjMxODg1IGwgLTYuNTAzNzksLTMwLjg0MDcyIGMgLTQuNjM4OTgsLTIxLjg4OTMgLTguOTA0OSwtNDguNDg3NSAtOS43MjA4LC01OC44MTQyMyAtMC44MzkyMywxMC4zMjY3MyAtNS4wODE4MiwzNi45MjQ5MyAtOS43MjA4LDU4LjgxNDIzIGwgLTYuNTI3MTMsMzAuODQwNzIgSCAxNDAuMDc2NjggTCAxMDYuMjA1NDUsNTQwLjM5ODcgaCA0MC41NjE1MiBsIDMuODQ2MzQsMjMuNzU0MTkgYyAzLjI2MzU5LDIwLjA5NDMzIDcuMTMzMjYsNDQuODUwNzYgOC41MzE5MSw2MS42ODE1NyAxLjYzMTc5LC0xNi42NDQzMSA2LjA4NDIxLC00MS4yMTQzMiAxMC41NTk5NSwtNjEuNTE4NDEgbCA0Ljg0ODgxLC0yMy45MTczNSBoIDM2LjEzMjM2IGwgNC44NzE5OSwyMy45MTczNSBjIDQuNDUyNTYsMjAuMzA0MDkgOC45MDQ5OCw0NC44NzQxIDEwLjU2MDAzLDYxLjUxODQxIDEuMzk4NjUsLTE2LjgzMDgxIDUuMjY4NDYsLTQxLjU4NzI0IDguNTA4NjYsLTYxLjY4MTU3IGwgMy44NDYzNCwtMjMuNzU0MTkgaCA0MC4xODg2IHoiCiAgICAgICAgIHN0eWxlPSJmaWxsOiNmZmZmZmY7ZmlsbC1ydWxlOm5vbnplcm87c3Ryb2tlOm5vbmU7c3Ryb2tlLXdpZHRoOjQuOTY4O3N0cm9rZS1saW5lY2FwOmJ1dHQ7c3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZS1taXRlcmxpbWl0OjMuODY0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZSIKICAgICAgICAgaWQ9InBhdGgxMjAiIC8+CiAgICAgIDxwYXRoCiAgICAgICAgIGQ9Im0gMzE0LjI1ODIzLDU2OC4yMDkwNSBjIC0xMS45ODIwNywwIC0yMC45MTAyMywtNi45MjM1MSAtMjAuOTEwMjMsLTE4LjA0MzAzIDAsLTEwLjM3MzQ2IDguOTI4MTYsLTE3LjY2OTgyIDIwLjkxMDIzLC0xNy42Njk4MiAxMi41NjQ3NSwwIDIxLjI4MzE2LDcuMjk2MzYgMjEuMjgzMTYsMTcuNjY5ODIgMCwxMS4xMTk1MiAtOC43MTg0MSwxOC4wNDMwMyAtMjEuMjgzMTYsMTguMDQzMDMgeiBNIDI5NS45ODIxOSw2ODIuNDM0MDggViA1NzkuMjU4NTEgaCAzNi41Mjg2OCB2IDEwMy4xNzU1NyB6IgogICAgICAgICBzdHlsZT0iZmlsbDojZmZmZmZmO2ZpbGwtcnVsZTpub256ZXJvO3N0cm9rZTpub25lO3N0cm9rZS13aWR0aDo0Ljk2ODtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDozLjg2NDtzdHJva2UtZGFzaGFycmF5Om5vbmUiCiAgICAgICAgIGlkPSJwYXRoMTIyIiAvPgogICAgICA8cGF0aAogICAgICAgICBkPSJtIDQ3Ny4zNDM1Myw1NzMuODczNjEgdiAzMS43NDk5NCBoIDc1LjU3NTA1IHYgMzMuMzExNzQgaCAtNzUuNTc1MDUgdiA0My40OTg3OSBoIC0zOS4xNjI4IFYgNTQwLjM5ODcgaCAxMjIuNzgwMjYgdiAzMy40NzQ5MSB6IgogICAgICAgICBzdHlsZT0iZmlsbDojMDAwMDAwO2ZpbGwtcnVsZTpub256ZXJvO3N0cm9rZTpub25lO3N0cm9rZS13aWR0aDo0Ljk2ODtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDozLjg2NDtzdHJva2UtZGFzaGFycmF5Om5vbmUiCiAgICAgICAgIGlkPSJwYXRoMTI0IiAvPgogICAgICA8cGF0aAogICAgICAgICBkPSJtIDYwMS45NjU0Miw1NjguMjA5MDUgYyAtMTEuOTU4NjgsMCAtMjAuOTEwMjQsLTYuOTIzNTEgLTIwLjkxMDI0LC0xOC4wNDMwMyAwLC0xMC4zNzM0NiA4Ljk1MTU2LC0xNy42Njk4MiAyMC45MTAyNCwtMTcuNjY5ODIgMTIuNTY0ODIsMCAyMS4yODMxNSw3LjI5NjM2IDIxLjI4MzE1LDE3LjY2OTgyIDAsMTEuMTE5NTIgLTguNzE4MzMsMTguMDQzMDMgLTIxLjI4MzE1LDE4LjA0MzAzIHogTSA1ODMuNzEyNzgsNjgyLjQzNDA4IFYgNTc5LjI1ODUxIGggMzYuNTA1MzUgdiAxMDMuMTc1NTcgeiIKICAgICAgICAgc3R5bGU9ImZpbGw6IzAwMDAwMDtmaWxsLXJ1bGU6bm9uemVybztzdHJva2U6bm9uZTtzdHJva2Utd2lkdGg6NC45Njg7c3Ryb2tlLWxpbmVjYXA6YnV0dDtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlLW1pdGVybGltaXQ6My44NjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lIgogICAgICAgICBpZD0icGF0aDEyNiIgLz4KICAgIDwvZz4KICA8L2c+Cjwvc3ZnPgo='/>
+                <ul>
+                    <!-- https://fa2png.app/ -->
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="1em" height="1em" fill="#ffffff"><path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm95.8 32.6L272 480l-32-136 32-56h-96l32 56-32 136-47.8-191.4C56.9 292 0 350.3 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-72.1-56.9-130.4-128.2-133.8z"></path></svg>
+                        <span>Odoo-LLN</span>
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="1em" height="1em" fill="#ffffff"><path d="M624 208h-64v-64c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v64h-64c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h64v64c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-64h64c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm-400 48c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path></svg>
+                        <span>Odoo-Guest</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="dateTime">
+            <p>
+                <span id="time"></span>
+                <span id="date"></span>
+            </p>
+        </div>
+        <div class="menu-section">
+            <div id="menu">
+                <h1>Menu of the week</h1>
+                <div id="content"></div>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script type="text/javascript">
+            setInterval(function() {
+                document.getElementById("time").innerHTML = new Date().toLocaleTimeString('en-US', {hour: "numeric", minute: "numeric"});
+            }, 3000);
+            document.getElementById("date").innerHTML = new Date().toLocaleDateString('en-GB', {weekday: 'long', day: "numeric", month: "long"});
+
+            $(function() {
+                var welcomeSection = $('.welcome-section');
+                var menuSection = $('.menu-section');
+                
+                setTimeout(function() {
+                    welcomeSection.removeClass('content-hidden');
+                }, 500);
+
+                
+            });
+        </script>
+        <script type="text/javascript">
+      // Client ID and API key from the Developer Console
+      var CLIENT_ID = '711712440592-m518gpm6k86v83btufmgi9h8sjvjhpm5.apps.googleusercontent.com';
+      var API_KEY = 'AIzaSyBESq5nzmpchRjwzOdxNKFnNOHMpc9_kMU';
+
+      // Array of API discovery doc URLs for APIs used by the quickstart
+      var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+
+      // Authorization scopes required by the API; multiple scopes can be
+      // included, separated by spaces.
+      var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+
+      var authorizeButton = document.getElementById('authorize_button');
+      var signoutButton = document.getElementById('signout_button');
+
+      /**
+       *  On load, called to load the auth2 library and API client library.
+       */
+      function handleClientLoad() {
+        gapi.load('client:auth2', initClient);
+      }
+
+      /**
+       *  Initializes the API client library and sets up sign-in state
+       *  listeners.
+       */
+      function initClient() {
+        gapi.client.init({
+          apiKey: API_KEY,
+          clientId: CLIENT_ID,
+          discoveryDocs: DISCOVERY_DOCS,
+          scope: SCOPES
+        }).then(function () {
+          // Listen for sign-in state changes.
+          gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+          // Handle the initial sign-in state.
+          updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+          authorizeButton.onclick = handleAuthClick;
+          signoutButton.onclick = handleSignoutClick;
+        }, function(error) {
+          appendPre(JSON.stringify(error, null, 2));
+        });
+      }
+
+      /**
+       *  Called when the signed in status changes, to update the UI
+       *  appropriately. After a sign-in, the API is called.
+       */
+      function updateSigninStatus(isSignedIn) {
+        if (isSignedIn) {
+          authorizeButton.style.display = 'none';
+          signoutButton.style.display = 'none'; // block
+          listUpcomingEvents();
+        } else {
+          authorizeButton.style.display = 'block'; // block
+          signoutButton.style.display = 'none';
+        }
+      }
+
+      /**
+       *  Sign in the user upon button click.
+       */
+      function handleAuthClick(event) {
+        gapi.auth2.getAuthInstance().signIn();
+      }
+
+      /**
+       *  Sign out the user upon button click.
+       */
+      function handleSignoutClick(event) {
+        gapi.auth2.getAuthInstance().signOut();
+      }
+
+      /**
+       * Generate the table of the 5 nexts days
+       */
+      function generateTable() {
+        var menu = document.getElementById('content');
+        var tbl  = document.createElement('table');
+
+        let thead = document.createElement('thead');
+        let tbody = document.createElement('tbody');
+
+        let firstRow = thead.insertRow();
+        let secondRow = tbody.insertRow();
+
+        for(i=0; i < eventsArray.length; i++) {
+          let headerCell = document.createElement("th");
+          headerCell.innerHTML = dateArray[i];
+          console.log(headerCell);
+          firstRow.appendChild(headerCell);
+
+          if(i == 0) {
+            let firstHeaderCell = document.createElement("th");
+            firstHeaderCell.innerHTML = eventsArray[i];
+            secondRow.appendChild(firstHeaderCell);
+          } else {
+            let normalCell = secondRow.insertCell(i);
+            newEvent = document.createTextNode(eventsArray[i]);
+            normalCell.appendChild(newEvent);
+          }
+        }
+
+        tbl.appendChild(thead);
+        tbl.appendChild(tbody);
+        menu.appendChild(tbl);
+      }
+
+      let dateArray = [''];
+      let eventsArray = ['Lunch'];
+
+      function containsWeekend(d1, d2)
+      {
+          // note: I'm assuming d2 is later than d1 and that both d1 and d2 are actually dates
+          // you might want to add code to check those conditions
+          var interval = (d2 - d1) / (1000 * 60 * 60 * 24); // convert to days
+          if (interval > 5) {
+              return true;    // must contain a weekend day
+          }
+          var day1 = d1.getDay();
+          var day2 = d2.getDay();
+          return !(day1 > 0 && day2 < 6 && day2 > day1);
+      }
+
+      function generateDate(when) {
+        return new Date(when).toLocaleString('en-GB', {weekday: 'short', day: "numeric", month: "numeric"}).replace(/,/g, '')
+      }
+
+      String.prototype.capitalize = function() {
+        return this.charAt(0).toUpperCase() + this.slice(1);
+      }
+
+      /**
+       * Print the summary and start datetime/date of the next five events in
+       * the authorized user's calendar.
+       */
+      function listUpcomingEvents() {
+        gapi.client.calendar.events.list({
+          'calendarId': 'c_m4ke9i9fdn0o5bitqlc8pei1ro@group.calendar.google.com', //c_m4ke9i9fdn0o5bitqlc8pei1ro@group.calendar.google.com
+          'timeMin': (new Date()).toISOString(),
+          'showDeleted': false,
+          'singleEvents': true,
+          'maxResults': 6,
+          'orderBy': 'startTime'
+        }).then(function(response) {
+          var events = response.result.items;
+
+          if (events.length > 0) {
+            for (i = 0; i < events.length; i++) {
+              var event = events[i];
+              var when = event.start.dateTime;
+              if (!when) {
+                when = event.start.date;
+              }
+              dateArray.push(generateDate(when));
+              eventsArray.push(event.summary.capitalize());
+              if (i + 1 < events.length) {
+                const next = new Date(events[i + 1].start.date)
+                if (containsWeekend(new Date(when), next)) {
+                  dateArray.push("");
+                  eventsArray.push("Weekend 🥳");
+                }
+              }
+            }
+            dateArray = dateArray.slice(0, 6);
+            eventsArray = eventsArray.slice(0, 6);
+            generateTable();
+          }
+        });
+      }
+    </script>
+
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+    </body>
+</html>

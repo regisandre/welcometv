@@ -1,0 +1,1 @@
+Python v3 to launch an HTTP server locally : python3 -m http.server 8000

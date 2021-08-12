@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="refresh" content="10">
+        <title>Welcome - Odoo</title>
+        <style type="text/css">
+            * {
+                margin: 0;
+                padding: 0;
+                cursor: none;
+            }
+
+            body {
+                font-family: Montserrat, 'Open Sans', sans-serif;
+                font-weight: 400;
+                -webkit-touch-callout: none; /* iOS Safari */
+    			-webkit-user-select: none; /* Safari */
+     			-khtml-user-select: none; /* Konqueror HTML */
+       			-moz-user-select: none; /* Old versions of Firefox */
+        		-ms-user-select: none; /* Internet Explorer/Edge */
+            		user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+                background-color: #875A7B;
+                color: #fff;
+            }
+
+            .welcome-section {
+                display: flex;
+                width: 50%;
+                height: 100vh;
+                overflow: hidden;
+                float: left;
+                align-items: center;
+            }
+
+            .welcome-section .content-wrap {
+                margin: auto;
+                transform: translate3d(0, 0, 0);
+            }
+
+            .welcome-section .content-wrap .fly-in-text {
+                list-style: none;
+            }
+
+            .welcome-section .content-wrap .fly-in-text li {
+                display: inline-block;
+                /* margin-right: 15px; */
+                font-size: 9em;
+                transition: all 2s ease;
+            }
+
+            .welcome-section .content-wrap .fly-in-text li:last-child {
+                margin-right: 0;
+            }
+
+            .welcome-section .content-wrap .enter-button {
+                display: block;
+                text-align: center;
+                font-size: 4.5em;
+                color: #00A09D;
+                opacity: 1;
+                transition: all 1s ease 2s;
+            }
+
+            #menu {
+                display: flex;
+                float: left;
+                width: 50%;
+                height: 100vh;
+                align-items: center;
+                color: white;
+                justify-content: center;
+                flex-wrap: wrap;
+                flex-direction: column;
+                font-size: 1.5em;
+            }
+
+            #menu h1 {
+                color: #00A09D;
+                font-size: 3em;
+            }
+
+            #menu table {
+                width: 85%;
+                table-layout: fixed;
+                line-height: 1.3;
+                border: 1px solid white;
+            }
+
+            #menu table td {
+                padding: 10px 20px 20px 0;
+                vertical-align: text-top;
+                font-size: 0.9em;
+            }
+
+            #menu table thead th {
+                text-decoration: underline;
+            }
+            
+            .welcome-section.content-hidden .content-wrap .fly-in-text li { opacity: 0; }
+            .welcome-section.content-hidden .content-wrap .fly-in-text li:nth-child(1) { transform: translate3d(-100px, 0, 0); }
+            .welcome-section.content-hidden .content-wrap .fly-in-text li:nth-child(2) { transform: translate3d(100px, 0, 0); }
+            .welcome-section.content-hidden .content-wrap .enter-button { opacity: 0; transform: translate3d(0, -30px, 0); }
+        </style>
+    </head>
+    <body>
+        <div class="welcome-section content-hidden">
+            <div class="content-wrap">
+                <ul class="fly-in-text">
+                    <li>Wel</li>
+                    <li>come</li>
+                </ul>
+
+                <span class="enter-button">Odooers</span>
+            </div>
+        </div>
+        <div id="menu">
+            <h1>Menu of the week</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+			<th>Mon 02/08</th>
+			<th>Tue 03/08</th>
+                        <th>Wed 04/08</th>
+			<th>Thu 05/08</th>
+			<th>Fri 06/08</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Lunch</th>
+                        <td>
+			    Real spaghetti carbonara
+                        </td>
+                        <td>
+                            Mussels
+                        </td>
+                        <td>
+                            Grilled rib steak
+                        </td>
+                        <td>
+                            Pure pork tenderloin with vegetables
+                        </td>
+                        <td>
+                            Homemade fish tick 
+                        </td>
+	             </tr>
+		     <!--
+                     <tr>
+	                <th>Next week</th>
+                        <td>
+                            Caesar salad and perfect egg
+                        </td>
+                        <td>
+                            Grilled pieces of beef (from La Vache à Table), potato gratin and organic vegetables
+                        </td>
+                        <td>
+                            Public holiday
+                        </td>
+                        <td>
+                            Porchetta, tabbouleh with herbs and aubergines gratin
+                        </td>
+                        <td>
+                            Penne arrabiata and guanciale
+                        </td>
+                     </tr>
+		     -->
+                </tbody>
+            </table>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                var welcomeSection = $('.welcome-section'), enterButton = welcomeSection.find('.enter-button');
+                
+                setTimeout(function() {
+                    welcomeSection.removeClass('content-hidden');
+                }, 500);
+                
+                enterButton.on('click', function(e) {
+                    e.preventDefault();
+                    welcomeSection.addClass('content-hidden').fadeOut();
+                });
+            });
+        </script>
+    </body>
+</html>
